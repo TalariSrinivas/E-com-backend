@@ -21,9 +21,10 @@ const app = express();
 
 // ✅ Enable CORS for React Frontend
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173', // Use env for production
-    credentials: true
+  origin: process.env.FRONTEND_URL,  // MUST be exact frontend deployed url with https://
+  credentials: true,
 }));
+
 
 // ✅ Middlewares
 app.use(express.json());

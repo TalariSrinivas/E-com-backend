@@ -6,12 +6,12 @@ const createToken = (res, userId) => {
     expiresIn: '30d',
   });
 
-  res.cookie('jwt', token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production', // true on Render
-    sameSite: 'None', // REQUIRED for cross-site
-    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-  });
+res.cookie("jwt", token, {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",  // true on deployed HTTPS
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",  // none for cross-site prod, lax locally
+  maxAge: 30 * 24 * 60 * 60 * 1000,
+});
 };
 
 export default createToken;
